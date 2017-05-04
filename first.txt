@@ -1,12 +1,13 @@
-This file is empty!...Not! :-)
+git status
 
-Files only can be commited in Git-cola, when there is a change. Seems so.
+git diff
 
-<<<<<<< HEAD
-Still get confused what is going on. But, kind of on track.
+git add filename
 
-=======
->>>>>>> ea5787a5127300244c93cfb90b5310318b3c44e9
+git commit -m "your message1"
 
+git tag -a version_name -m 'your message 2'
 
+git push
 
+# your changes appear on github
