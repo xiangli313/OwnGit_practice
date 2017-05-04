@@ -2,8 +2,11 @@ This file is empty!...Not! :-)
 
 Files only can be commited in Git-cola, when there is a change. Seems so.
 
+<<<<<<< HEAD
 Still get confused what is going on. But, kind of on track.
 
+=======
+>>>>>>> ea5787a5127300244c93cfb90b5310318b3c44e9
 
 
 
