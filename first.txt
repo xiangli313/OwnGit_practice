@@ -1,0 +1,7 @@
+This file is empty!...Not! :-)
+
+Files only can be commited in Git-cola, when there is a change. Seems so.
+
+
+
+
