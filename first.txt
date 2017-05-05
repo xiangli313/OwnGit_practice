@@ -1,4 +1,10 @@
-Show the working tree status
+#First of all you need to go to the repository directory
+git clone repository_link
+# The terminal will ask you for username and pswd. Once validated, repository will be cloned.
+
+#Now you may go to the repository, view and edit.
+
+#Show the working tree status
 git status
 
 #Show changes between commits, commit and working tree, etc
@@ -10,10 +16,12 @@ git add filename
 # Record changes to the repository
 git commit -m "your message1" 
 
-#Create, list, delete or verify a tag object signed with GPG
+#Create, list, delete or verify a tag object signed with GPG. You may not need this.
 git tag -a version_name -m 'your message 2'
+
+# Fetch from and integrate with another repository or a local branch
+git pull
 
 #Update remote refs along with associated objects
 git push
-
 # your changes appear on github
