@@ -1,0 +1,1 @@
+command git rebase test master is too complex for me to understand
