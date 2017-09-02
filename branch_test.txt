@@ -1,0 +1,6 @@
+This file is created to record some git practices.
+
+Now, I am going to save this file and push it to master branch.
+
+Then I am going to switch into branch test, and see how far I am behind the master branch.
+
