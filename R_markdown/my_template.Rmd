@@ -1,0 +1,30 @@
+---
+title: "my template"
+author: "Xiang Li"
+date: "`r Sys.Date()`"
+output: pdf_document
+#output: beamer_presentation
+#toc: true
+#number_sections: true
+# add {.tabset} to the end of First level Header
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE}
+spelling::spell_check_files("markdown1.Rmd")
+```
+
+eval TRUE Whether to evaluate the code and include its results
+echo TRUE Whether to display code along with its results
+warning TRUE Whether to display warnings
+error FALSE Whether to display errors
+message TRUE Whether to display messages
+tidy FALSE Whether to reformat code in a tidy way when displaying it
+results "markup" "markup", "asis", "hold", or "hide"
+cache FALSE Whether to cache results for future renders
+comment "##" Comment character to preface results with
+fig.width 7 Width in inches for plots created in chunk
+fig.height 7 Height in inches for plots created in chunk
