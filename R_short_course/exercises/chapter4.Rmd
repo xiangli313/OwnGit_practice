@@ -1,0 +1,132 @@
+---
+title: "Chapter 4 Exercises"
+author: "Jumping Rivers"
+output: html_vignette
+---
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{Chapter 4 Exercises}
+-->
+
+```{r echo=FALSE, message=FALSE}
+library("jrShiny")
+library("shiny")
+library("flexdashboard")
+```
+
+## Exercise 1
+
+  * Create a R markdown document with a standard YAML header. 
+    * In the main part of the document, have some R code that creates a simple
+    scatter plot and saves the resulting plot as a pdf file,e.g. 
+        ```{r eval=FALSE}
+        x = rnorm(10)
+        plot(x)
+        pdf("fileA.pdf")
+        plot(x)
+        dev.off()
+        ```
+  * Now in the YAML section, add a parameter called `filename` with the value `file1.pdf`
+  * In the main part of the document, access the parameter via `params$filename`
+  * Instead of `fileA.pdf`, pass the parameter from the YAML header
+    * Your R markdown document should display the scatter plot __and__ save the plot
+    in a file called `file1.pdf`
+    
+## Exercise 2
+
+  * Copy your previous Rmd file, but delete the `params` section from the YAML header
+  * Pass the `filename` parameter via the `render()` function
+    ```{r, eval=FALSE}
+    rmarkdown::render("MyDocument.Rmd", 
+	    params = list(
+		  filename = "file2.pdf"
+	   )
+    )
+    ```
+  * Check that you have created `file2.pdf`
+
+## Exercise 3
+
+Unfortunately, to run scheduler tasks it depends on 
+
+ * Your operating system
+ * The requirement for admin privilages
+ 
+This means it's hard to get an exercise that will suit everyone. To get the
+general idea across I've created a simple function called `scheduler()`. 
+
+When we run the same script multiple times, there are two possibilities:
+
+  * We constantly overwrite the previous output (this is straightforward)
+  * We dynamically create file names so we have a record. This is what we'll do 
+  in the tasks below.
+  
+### Task 1
+
+Create a standard Rmd file (don't worry about `params`). In the body of the document
+include
+```{r eval=FALSE}
+x = rnorm(10)
+plot(x)
+pdf("fileA.pdf")
+plot(x)
+dev.off()
+```
+We want to change `fileA.pdf` to be unique. The easiest way is to use current time.
+In R we have
+```{r}
+Sys.Date()
+Sys.time()
+```
+In this exercise we'll use `Sys.time()`, but you may find `Sys.Date()` more suitable in general.
+We need to convert the time to a file name. First convert it to a character
+
+```{r}
+fname = as.character(Sys.time())
+```
+
+Then add on a `pdf` file extension using the `paste0()` function
+
+```{r}
+fname = paste0(as.character(Sys.time()), ".pdf")
+```
+Now change `fileA.pdf` to use fname. Run your script and ensure that it works.
+
+### Task 2
+
+The `scheduler()` function is simple. It has three arguments:
+
+  * `rmd_name`: The name of `Rmd` script you want to generate
+  * `repeats`: How often should we run the script (from now)
+  * `time_between`: The time between script calls
+
+```{r, eval=FALSE}
+library(jrShiny)
+## time_between is in seconds
+scheduler(script_name = "my_script.Rmd", repeats = 5, time_between = 5) 
+```
+
+Using the `schedular()` function, run your `Rmd` file 5 times with a 3 second interval.
+
+
+### Handy functions for file manipulation
+
+Function name | Description
+--------------|------------
+`dir.create()` | Creates a new directory
+`dir.exists()` | Checks a directory exists
+`file.create()` | Creates a new file
+`file.exists()` | Checks a file exists
+`file.remove()` | Removes a file
+`file.info()` | Size, creation date, etc.
+
+
+
+
+
+
+
+
+
+
+
