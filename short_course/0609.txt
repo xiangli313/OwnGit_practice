@@ -1,0 +1,6 @@
+### statistics - estimating parameters from data - by Christl Donnelly
+
+2*(L1 - L2) ~ Ki-squared distribution with freedom N-p
+
+~ model selection AIC/BIC (or other liklihood based criteria)
+~ goodness-of-fit test (use test data not the data you developed the model)

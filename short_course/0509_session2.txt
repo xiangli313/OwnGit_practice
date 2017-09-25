@@ -1,0 +1,32 @@
+# Model - four typrs
++ qualitative
++ predictive
++ inferenctial
++ operational
+
+
+### Kermac and McKendrick models - some of their models track through time? seems yes
+
+# Frost and Agent based simulation - first example of MCMC simulation
+
+# reed-frost model - probabilistic model of epidemic spread
+
+# event-driven stochastic sir model
+ --- time to the next event is drawn from Poisson distribution
+# stochastic compartmental models
+
+# heterogenerous contact - metapopulation, spatial(distancece), group, netwoek  		
+
+# three differnt ways of modelling
+frequentist: likelihood ratio test
+information thero: AIC/BIC
+Bayesian 
++ likelihood penalises goodness-of-fit
+
+
+
+###OUtbreak analysis and modelling by Neil
+
+
+
+

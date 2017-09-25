@@ -1,0 +1,29 @@
+# Introduction to designing infectious disease models (1)
+
+# model - sumplification of a system, suitable for analysis and thinking
+
++ we are interested in the population-level effect of processes occurring at the individual level
+
++ force of infection : an uninfected indicidual's rish of becoming infected depends upon the prevalence of infectious individuals, rate of contact, infectiousness of infected individuals, etc. 
+
+~ transimission is a dynamic process
+
+
++natual history of infection --> latency, infectious period, immunity
++ transmission of infection
++population structure and demograpjy
++interventions
+
+
+# the simplist compartmental model - compartments and rates of change(birth rate, incidence of infection, recovery rate, mortality rate, added risk etc)
+
+state of system (state variable) --> changes of the state of the system (differential equations)--> state of the system (state variable updated)
+
+
+??? incubation and latent  periods
+
+ per-capita rate (hazard)
+
+force of infection - per-capita rate of infection of susceptibles
++ it depends on the number of infectious, contact rate, transmission probeability (p of infection per contact)
++ therefore it is non-linear

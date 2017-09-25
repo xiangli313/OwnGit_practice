@@ -1,0 +1,55 @@
+## First session is about R_0 the basic reproduction rate.
+# probability of contact and transmission
+
++ what is a contact ? Interesting
+
++ probability of trnasmission - is per contact
+
++ it is interesting to understand R_0 = p c D, and there inter-relations
+- probability of transmission, contact rate, duration of infeciousness
+
++ it is interesting to know the above, but it is prefeablt to esimtate R_o indirectly. Because direct estimation is too
+
+
+== I am not sure if I understand right. R_0 is the called basic reproduction rate, it assumes that when a person is infected and introduced into a population that is fully susceptiable, how may he can infect is R_0. It is variable, because as time goes on, fewer susceptiable people (periodic, because each year, we have new borns), treatment, etc.
+
+
+
+
+## Session 2 : Tini's herd effect
+
+
++ cohort study --> relative risk
++ case-control cohort --> odds ratio
+
++ incidence and prevelence are related, so we have differential equations. eg dI/dt = f(I/N), where dI/dt is incidence and I?N is prevelence
+
++ indirect effects of interventions - can have 
+
++risk factors for susceptibility to infection can be studied in cohot studies (if case-control studies, needs to be caucious)
+
+# popularion level study
++ ecolofical analysis
++ mathematical modelling
++ cluster randomized trails - the gold standard
+
+
+# herd immunity and critical vaccine coverage
++ if I understand right, herd effect happens when teh critical vaccine coverage is met
++ therefore it is again a story of R_0
++ OK, R_0 is cool
++ p_c = (R_0 - 1) / R_0
+
+
+
+# attributing disease to risk factors
++ populataion : it is not homogeneous with respect to risk of acquiring disease
+- (PAF) population attribution fraction -> measure impact of a risk facrot on disease incidence in a population
+- you need to check the definition of PAF
+
++ case-cotrol study --> RR
++ epidemic modelling --> p_D 
+
+
+
+

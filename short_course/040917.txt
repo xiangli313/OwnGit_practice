@@ -1,0 +1,70 @@
+#session 10:00 - 11:00
+
+# what do infecious disease have in common
++ transmission
+-diffenet forms
++ basic reproduction number - R_0
+- how many other prople one person infects
+- needs to be >0 for an epidemic to take off
+- reavent to the begining of an epidemic
+- T_g feneration time and R_0 determin growth rate (rate of what - seems the exponential growth stage of the epidemic up tp equilibruim)
+
+
++ critical vaccine coverage
+reduce the reporduction number by reducing the number of people that are susceptible.
+- critical coverage 
+p_c = (R_0 -1) / R_0
+- when R_0 is large, we need to maintain high coverage, like measles
+
+# contrilling indecious disease
++control R_0 so that R_0 <1
++doable through 
+-reducing contacts (quarantine, social distancing
+-reducing susceptibility (vaccination, prophylaxis
+-reduce infectiousness (eg: treatment
+
++ targets who, how much effort, how to estiamte R_0 and T_0
+
+
+# More about R_0
++ not a fundamental biological constant
+
++ determined by pathogen biology (pathogenesis, lifecucle, variability), host factors(genetics, nutrition, age, co-mobidities), population structure (demography, contact patterns)
+
+# a demonstraction of R_0 (simplified, not recommended, because you can never be accurate)
++ R+0 = D * c * p
+- where D: mean lengthion and epidemic modelling
+ of tieme infectious
+- c: rate at which contacts occir
+- probability of transmission per contact
+
+
+
+
+# model validation
+training dataset and validation dataset - as comparable as possible, but hard to have such datasets
+
+models should reproduce paste epidemics (goodness of fit)
+
+
+# what are models for 
++ qualirarive
++ predictive
++ operational
+
+
+
+
+# natual history, evolution, interventions, demofraphy, epidemilology, contact patterns and assumptions 
+# model
+# insight into mechanism, fundamental parameters, detailed predictions etc
+
+
+# Trends in modelling
+traditional - equilibrium
+then dynamics of epidemics
+real-time modelling due to eg SARS
+seasonal and spatioal fynamics
+model fitting / parameter estimation
+targetting interventions
+integrating generics, evolut
