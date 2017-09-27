@@ -3,6 +3,8 @@ title: "My first presentation"
 author: "Colin Gillespie"
 date: "`r Sys.Date()`"
 output: revealjs::revealjs_presentation
+#output: ioslides_presentation
+#output: slidy_presentation
 ---
 
 ## R Markdown
@@ -30,4 +32,18 @@ summary(cars)
 ```{r pressure}
 plot(pressure)
 ```
+
+# my header
+
+## a plot
+
+```{r mtcars}
+#library("gapminder")
+#data(gapminder, package = "gapminder")
+#plot(lifeExp~gdpPercap, data = gapminder)
+library(d3heatmap)
+d3heatmap(mtcars)
+```
+
+
 

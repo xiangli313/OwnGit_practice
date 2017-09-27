@@ -91,3 +91,26 @@ First Header  | Second Header
 Content Cell  | Content Cell
 Content Cell  | Content Cell
 
+
+```{r}
+library("gapminder")
+data(gapminder, package = "gapminder")
+plot(lifeExp~gdpPercap, data = gapminder)
+library(d3heatmap)
+d3heatmap(mtcars)
+```
+
+echo = true : show codes (default)
+echo = false : no show
+
+eval = true : run codes (default)
+eval = false : don't run codes
+
+include = true :  show outputs (default)
+include = false : no show
+
+\newline
+<!-- in-text reference r -->
+Colnames of data __mtcar__ are `r names(mtcars)`
+
+

@@ -3,11 +3,20 @@ title: "my template"
 author: "Xiang Li"
 date: "`r Sys.Date()`"
 #output: pdf_document
-output: beamer_presentation
-#toc: true
-#number_sections: true
+output: 
+  pdf_document:
+#html_document:
+#output: beamer_presentation
+#output: ioslides_presentation
+#output: revealjs::revealjs_presentation
+#output: ioslides_presentation
+#output: slidy_presentation
+   toc: true
+   number_sections: true
 # add {.tabset} to the end of First level Header
 ---
+ctrl + shift + c comments out things
+<!-- N.B. The above is a yml header -->
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -17,6 +26,14 @@ knitr::opts_chunk$set(echo = TRUE)
 #spelling::spell_check_files("markdown1.Rmd")
 ```
 
+# chapter
+
+## section
+
+## section
+
+
+  
 eval TRUE Whether to evaluate the code and include its results
 echo TRUE Whether to display code along with its results
 warning TRUE Whether to display warnings
