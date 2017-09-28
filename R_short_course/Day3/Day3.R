@@ -252,3 +252,12 @@ pushViewport( viewport(layout = grid.layout(100, 100)))
   
   %>% is a function from library - magrittr
   it takes an object on the left and passes the object to a function on the right as its first argument
+  
+  
+  
+  g = ggplot() + geom_*(aes(..., frame = <your_frame>))
+  you will have a warning message, because frame is not an aesthetics component
+  but frame can be read by plotly
+  library(plotly)
+  ggplotly(g)
+  you see magic
