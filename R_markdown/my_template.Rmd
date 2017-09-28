@@ -2,9 +2,8 @@
 title: "my template"
 author: "Xiang Li"
 date: "`r Sys.Date()`"
-#output: pdf_document
 output: 
-  pdf_document:
+  html_document:
 #html_document:
 #output: beamer_presentation
 #output: ioslides_presentation
@@ -14,7 +13,15 @@ output:
    toc: true
    number_sections: true
 # add {.tabset} to the end of First level Header
+params:
+  first_name  : 0
+  second_name : 0
+  DOB         : 0
 ---
+
+Print parameters `r params`
+
+
 ctrl + shift + c comments out things
 <!-- N.B. The above is a yml header -->
 
@@ -34,14 +41,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
   
-eval TRUE Whether to evaluate the code and include its results
-echo TRUE Whether to display code along with its results
-warning TRUE Whether to display warnings
-error FALSE Whether to display errors
-message TRUE Whether to display messages
-tidy FALSE Whether to reformat code in a tidy way when displaying it
-results "markup" "markup", "asis", "hold", or "hide"
-cache FALSE Whether to cache results for future renders
-comment "##" Comment character to preface results with
-fig.width 7 Width in inches for plots created in chunk
-fig.height 7 Height in inches for plots created in chunk
+<!-- eval TRUE Whether to evaluate the code and include its results -->
+<!-- echo TRUE Whether to display code along with its results -->
+<!-- warning TRUE Whether to display warnings -->
+<!-- error FALSE Whether to display errors -->
+<!-- message TRUE Whether to display messages -->
+<!-- tidy FALSE Whether to reformat code in a tidy way when displaying it -->
+<!-- results "markup" "markup", "asis", "hold", or "hide" -->
+<!-- cache FALSE Whether to cache results for future renders -->
+<!-- comment "##" Comment character to preface results with -->
+<!-- fig.width 7 Width in inches for plots created in chunk -->
+<!-- fig.height 7 Height in inches for plots created in chunk -->
+
+```{r}
+library(ggplot2)
+library(plotly)
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+            geom_bar(position = "dodge")
+ggplotly(p)
+```
+

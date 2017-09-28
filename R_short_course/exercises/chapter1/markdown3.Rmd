@@ -37,12 +37,12 @@ plot(pressure)
 
 ## a plot
 
-```{r mtcars}
+```{r mtcars, echo = FALSE, fig.height = 4}
+library(d3heatmap)
+d3heatmap(mtcars)
 #library("gapminder")
 #data(gapminder, package = "gapminder")
 #plot(lifeExp~gdpPercap, data = gapminder)
-library(d3heatmap)
-d3heatmap(mtcars)
 ```
 
 
