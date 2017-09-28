@@ -1,0 +1,104 @@
+---
+title: ""
+author: "Author: Xiang Li"
+output: 
+  flexdashboard::flex_dashboard:
+    source_code: embed
+    vertical_layout: fill
+    self_contained: yes
+    theme: readable
+    socail: ["twitter", "facebook"]
+    logo: "logo.png"
+---
+
+Wiki
+==============
+
+Column {.tabset .tabset-fade}
+--------------
+### Abstract
+This dashboard uses library __flexdashboard__ with output parameters. The aim of this dashboard is to document R functions developed by **Xiang Li**.
+
+### Reference
+
+[1]. http://rmarkdown.rstudio.com/flexdashboard/index.html
+
+Round numbers
+===============
+
+Column 1 {data-width=300}
+-------------
+### Function __round_xl(x, digit)__
+
+```{r, echo=TRUE}
+round_xl <- function(x, digit = 0){
+  sig <- sign(x)
+  x <- abs(x)
+  pow = 10^digit
+  tmp = x * pow *10
+  tmp2 = x * pow
+  tmp3 = as.integer(tmp2)
+  tmp4 = tmp - tmp3*10
+  if( tmp4 >= 5){ out = tmp3 + 1} else {out = tmp3}
+  out = out/pow*sig
+  return(out)
+}
+```
+This function is an alternative to commonly used __round(x = x, digit = digit)__ function. The motivation is to deal with rounding numbers at 5.
+
+### Function __round_vec_xl(x, digit)__
+```{r, echo=TRUE}
+round_vec_xl <- function(x, digit){
+  sapply(x,digit = digit,round_xl)
+}
+```
+This function extends __round_xl(x = x, digit = digit)__ from evaluating a single number to a vector.
+
+Column 2 {data-width=300}
+-------------------------------------
+### Example
+```{r echo=TRUE, results = 'asis'}
+x = 0.55555
+round_xl(x,0)
+round_xl(x,1)
+round_xl(x,2)
+```
+
+### Example
+```{r echo=TRUE, results = 'asis'}
+x = seq(-1,1,0.1)
+round_vec_xl(x,0)
+round_vec_xl(x,1)
+round_vec_xl(x,2)
+```
+
+
+Playground
+==========
+
+Column 1
+-----
+### chart 1
+
+```{r echo=TRUE}
+plot(1,1)
+```
+
+### chart 2
+
+```{r echo=TRUE}
+plot(1,1)
+```
+
+
+Column 2
+--------
+
+### chart 3
+```{r}
+library(ggplot2)
+library(plotly)
+p <- ggplot(data = diamonds, aes(x = cut, fill = clarity)) +
+            geom_bar(position = "dodge")
+ggplotly(p)
+```
