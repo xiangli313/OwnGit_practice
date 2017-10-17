@@ -50,7 +50,8 @@ g + geom_boxplot(aes(x=gender, y=beauty))
 g + geom_boxplot(aes(x=gender, y=beauty,
                      colour=factor(tenured)))
 g + geom_boxplot(aes(x=gender, y=beauty,
-                     colour=tenured)) # this is not working as wanted, because colour is discreat
+                     colour=tenured)) 
+# this is not working as wanted, because colour is discreat
 
 #### combining plots
 ### layers defined by the sequence of geom
@@ -133,7 +134,7 @@ ggplot(df) + geom_point(aes(x, y))
 
 ggplot(df) + geom_point(aes(x, y), colour="red", shape="k", alpha = 1)
 
-ggplot(df) + geom_point(aes(x, y, shape="."), alpha=1.e-1, colour="red")
+ggplot(df) + geom_point(aes(x, y, shape="k"), alpha=1.e-1, colour="red")
 
 df$z = round(df$y, 1)
 df$w = round(df$y, 0)
