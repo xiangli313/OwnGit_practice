@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>A refresher on git</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Jamie Owen (@jamieRowen)" />
+    <link href="libs/remark-css/example.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# A refresher on git
+### Jamie Owen (<a href="https://twitter.com/jamieRowen">@jamieRowen</a>)
+
+---
+
+
+
+
+layout: true
+
+      &lt;div class="jr-header"&gt;
+        &lt;img class="logo" src="assets/white_logo_full.png"/&gt;
+        &lt;span class="social"&gt;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&lt;img src="assets/twitter.gif"/&gt;&lt;/td&gt;&lt;td&gt; @jumping_uk&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      
+&lt;div class="jr-footer"&gt;&lt;span&gt;&amp;copy; 2017 Jumping Rivers (jumpingrivers.com)&lt;/span&gt;&lt;/div&gt;
+---
+
+# Set up your github repository
+
+* Go to github
+* Create a new repository 
+* Initialise with a README
+* Make a note of the repository address
+
+---
+
+# Only once
+
+The following steps you should only have to perform once on any given machine
+
+* Open bash terminal
+* On windows this can be found as git bash
+* Run `git config --global user.name "yourusername"`
+* Run `git config --global user.email "your registered email"`
+
+---
+
+# Start your Rstudio project
+
+* Create a new project
+* Choose checkout git repository
+* You may need to point RStudio at your git executable (Can be done under Tools -&gt; Global options)
+
+---
+
+# Adding a file
+
+Modified files can be added to be tracked by git in the git window of the environment pane
+
+* Select a file to be staged
+* Click Commit - this creates the snapshot of the repository
+* Click Push - this pushes all commits to the remote repository
+
+---
+
+# Pulling files
+
+* It is a good idea to pull whenever you start work
+* Especially if you are working with other people
+* Click pull - pulls in all changes on the remote to your local version
+
+---
+
+# Everything is backed up
+
+* When using a remote repository you get the benefit of everything being backed up
+* All local copies (i.e on laptops/computers) have a full copy of the commit history
+* Worth remembering since it means nothing in the history is confidential
+
+---
+
+# Some other useful commands
+
+* git diff - shows differences between files - defaults to the two most recent versions
+* git log - used in the shell to show the history of commits
+
+---
+
+# For exisiting projects
+
+If you have an exisiting project that you want to associate with git 
+
+* Make sure that it is treated as an Rstudio project
+* You can create projects based on existing code
+* Create your new git repository on github.com or similar
+* In the shell 
+    + `git init`
+    + `git add "some file"`
+    + `git commit`
+    + `git remote add origin "url of remote repository"`
+    + `git push -u origin master`
+* Restarting Rstudio should then associate R studio project with the version control system
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});
+(function() {var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler"); if (!r) return; s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }"; d.head.appendChild(s);})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
