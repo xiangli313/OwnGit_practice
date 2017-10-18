@@ -10,11 +10,24 @@ library("shiny")
 
 ```{r}
 ## The UI
-sliderInput("n", "Sample size", 10, 50, 25)
+sliderInput("n", "Sample size", 10, 500, 25)
+sliderInput("m", "Mean", -10, 10, 0)
+sliderInput("sigma", "SD", 1, 5, 1)
 ```
 
-```{r}
-renderPlot({plot(rnorm(input$n))})
+```{r echo=FALSE}
+
+dat <- reactive({
+  rnorm(input$n, input$m, input$sigma)
+})
+
+renderPlot({
+  plot(dat())})
+
+renderText({
+  summary(dat())
+})
+
 ```
 
 

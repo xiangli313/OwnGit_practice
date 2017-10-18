@@ -3,4 +3,12 @@ runtime: shiny
 ---
 ```{r echo=FALSE}
 sliderInput("n", "Sample size", min=10, max=50, value=25)
+## Arguments: id, code to execute on the server
+observeEvent(input$n, {print(input$n)})
+```
+
+```{r}
+dateInput("date", label = h3("Date input"), value = "2014-01-01")
+observeEvent(input$date, {print(input$date)})
+
 ```

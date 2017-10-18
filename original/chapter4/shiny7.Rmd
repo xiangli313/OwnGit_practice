@@ -5,6 +5,7 @@ runtime: shiny
 
 ```{r echo=FALSE}
 library("shiny")
+knitr::opts_chunk$set(echo=FALSE)
 ```
 
 
@@ -16,8 +17,25 @@ actionButton("normal", "Normal")
 ```
 
 ```{r}
-# renderPlot()
-# renderText( )
+get_data = function(n, dist) {
+  if(dist=="Uniform") runif(n)
+  else rnorm(n)
+}
+
+sample <- reactiveValues(data=0)
+# change these varaibles (data) into reactive variables (sample)
+
+observeEvent(input$uniform, {
+ sample$data <- get_data(input$n, dist="Uniform")
+})
+observeEvent(input$normal, {
+ sample$data <- get_data(input$n, dist="Normal")
+})
+
+ renderText(sample$data)
+ #renderPlot({hist(sample$data, main=paste("Sample size:", input$n))})
+ renderPlot({hist(sample$data, main=paste("Sample size:", isolate(input$n)))})
+ ### the isolation function is useful here
 ```
 
 

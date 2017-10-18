@@ -1,11 +1,33 @@
 ---
 runtime: shiny
 ---
+
 ```{r echo=FALSE}
-sliderInput("n", "Sample size", min=10, max=50, value=25)
+sliderInput("n", "Sample size - left", min=100, max=500, value=250)
+
+sliderInput("m", "Sample size - right", min=100, max=500, value=150)
+
 ```
 
 ```{r}
 renderText(input$n)
-renderText(input$n*2)
+renderText(input$m)
+renderTable({
+s = input$n + input$m
+t = data.frame( sample_size_left = input$n, sample_size_right = input$m, sum = s)
+})
+
+renderPlot({
+  left <- rnorm(input$n, 5,1)
+  right <- rnorm(input$m, 6.5,2)
+   hist(left,  col = "red")
+   hist(right,  col = 'blue', add=TRUE)
+})
+
+renderPlot({
+  left <- rnorm(input$n, 5,1)
+  right <- rnorm(input$m, 6.5,2)
+   all <- c(left, right)
+   boxplot(all)
+})
 ```

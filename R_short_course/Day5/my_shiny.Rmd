@@ -1,0 +1,15 @@
+---
+title: "First app"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+selectInput("movie_type", # unique id
+label = "Movie genre", # Text for web
+c("Romance", "Action", "Animation"))
+```

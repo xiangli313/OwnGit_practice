@@ -10,14 +10,24 @@ library("shiny")
 
 ```{r}
 ## The UI
-sliderInput("n", "Sample size", 10, 50, 25)
+sliderInput("n", "Sample size", 10, 500, 100)
+selectInput("dist", "Distribution", c("Random", "Uniform"))
 ```
 
-```{r}
-renderPlot({plot(rnorm(input$n))})
+```{r echo=FALSE}
+
+dat <- reactive({
+  if(input$dist == 'Random') rnorm(input$n) else runif(input$n)
+  })
+
+renderPlot({plot(dat())})
+
+renderPlot({hist(dat())})
+
 renderText({
-  max(rnorm(input$n))
+  print(paste0("the maximum observation is ", round(max(dat()),2)))
 })
+
 ```
 
 
