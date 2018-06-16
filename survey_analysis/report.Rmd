@@ -1,0 +1,116 @@
+---
+title: "Two Child Era"
+author: "Lin Chen"
+date: "`r (Sys.time())`"
+output:
+  # html_document: default
+  # pdf_document: default
+  word_document: default
+---
+
+<!-- load R sources -->
+``` {r echo=FALSE, results="hide"}
+knitr::opts_chunk$set(error=FALSE)
+library("knitr")
+library("kableExtra")
+library("ggbiplot")
+source("R/clean.R")
+source("R/analysis.R")
+```
+
+<!-- Prepare data for analysis -->
+```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+src <- "data/2157154_seg_1.csv" 
+coding <- read.csv("data/survey_questions.csv", stringsAsFactors = FALSE)
+dat0 <- read_dat(src, coding)
+dat0 <- tran_age(dat0)
+dat0 <- tran_other(dat0)
+```
+
+### Internal consistency measures of reliability
+```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+dat <- sub_scale(dat0, coding, remove = FALSE)
+
+### cronbach's alpha from psych package
+#status origin - 0.916 - excelllent
+cols <- grep("status_origin[0-9]{1}", names(dat))
+psych::alpha(dat[cols])$total$std.alpha
+
+#status current - 0.917 - excellent
+cols <- grep("status_current[0-9]{1}", names(dat))
+psych::alpha(dat[cols])$total$std.alpha
+
+# #con-2-child - can become a subscale
+# psych::alpha(dat[29:34])$total$std.alpha
+# # pro-2-child - can become a subscale
+# psych::alpha(dat[36:41])$total$std.alpha
+#motherhood experience - questionable, but this is not a subscale though
+# cols <- grep("motherhood[0-9]{1}", names(dat))
+# psych::alpha(dat[cols])$total$std.alpha
+# life satisfaction - 0.886 - great
+cols <- grep("life_satisfaction[0-9]{1}", names(dat))
+psych::alpha(dat[cols])$total$std.alpha
+# motherhood satisfaction - 0.835 - great
+cols <- grep("motherhood_satisfaction[0-9]{1}", names(dat))
+psych::alpha(dat[cols])$total$std.alpha
+# mother interferes work - 0.932 - excellent
+cols <- grep("mother_interferes_work[0-9]{1}", names(dat))
+psych::alpha(dat[cols])$total$std.alpha
+# work interferes mother - 0.951 - excellent
+cols <- grep("work_interferes_mother[0-9]{1}", names(dat))
+psych::alpha(dat[cols])$total$std.alpha
+
+```
+
+### two sample t test
+```{r, echo = TRUE, results = 'markup'}
+# group by whether mothers are only-children to their own parents
+# we find group difference in the following variables
+dat <- sub_scale(dat0, coding, remove = TRUE)
+dat$high_edu <- dat$education > 1
+dat$high_income <- dat$income > 2
+groups <- c("only_child", "one_child", "young_mother", 
+            "self_2_child", "high_edu", "high_income")
+
+lapply(groups, function(group) unlist(lapply(names(dat)[-c(1:3)], function(i) two_sample_t(i, group, dat))))
+```
+
+
+
+<!-- ### Exploratory factor analysis -->
+<!-- ```{r, echo = TRUE, results = 'markup'} -->
+<!-- ## have to remove 2 rols to avoid singularity -->
+<!-- d <- dat[-c(1:3)] -->
+<!-- dat$rank2_son <- NULL -->
+<!-- dat$rank_daughter <- NULL -->
+
+<!-- for(v in names(d)) { -->
+<!--   #if( !all(is.numeric(d[[v]]) & is.finite(d[[v]])) ) { -->
+<!--   if( !all(is.finite(d[[v]])) ) { -->
+<!--     d[[v]] <- NULL -->
+<!--   } -->
+<!-- } -->
+<!-- d <- d[c(1:6, 23:34)] -->
+
+<!-- ## correlation matrix -->
+<!-- cor(d, method = c("pearson", "kendall", "spearman")) -->
+
+<!-- ## principle component -->
+<!-- d.pca <- princomp(d) -->
+<!-- summary(d.pca) -->
+<!-- plot(d.pca) # scree plot -->
+<!-- #biplot(princomp(d)) -->
+<!-- ## ggplot -->
+<!-- g <- ggbiplot(d.pca, choices = c(1,2), obs.scale = 1, var.scale = 1,  -->
+<!--               ellipse = TRUE, groups = d$only_child, -->
+<!--               circle = TRUE) -->
+<!-- g <- g + scale_color_discrete(name = '') -->
+<!-- g <- g + theme(legend.direction = 'horizontal',  -->
+<!--                legend.position = 'top') -->
+<!-- print(g) -->
+
+<!-- d.fac <- factanal(d, factors = 6, rotation = "varimax", scores=c("regression")) -->
+<!-- print(d.fac, digits = 2, cutoff = .4, sort = TRUE) -->
+<!-- ``` -->
+
+
