@@ -66,6 +66,13 @@ tran_other <- function(dat) {
   dat$mother_birth_order[i] <- 1L
   dat$mother_birth_order <- as.integer(dat$mother_birth_order)
   
+  ## mother has brothers
+  i <- grep("^birth_order[0-9]{1}", names(dat))
+  for(j in i) {
+    k <- dat[[j]] == "M"
+    dat$has_brothers[k] <- TRUE
+  }
+  dat$has_brothers[is.na(dat$has_brothers)] <- FALSE
   ## mother as the only child
   dat$only_child <- !(dat$birth_order2 %in% c("M", "F"))
   

@@ -1,11 +1,11 @@
 ---
-title: "Two Child Era"
+title: "Dissertaion Progress Report"
 author: "Lin Chen"
 date: "`r (Sys.time())`"
 output:
   # html_document: default
-  # pdf_document: default
-  word_document: default
+   pdf_document: default
+  # word_document: default
 ---
 
 <!-- load R sources -->
@@ -13,10 +13,19 @@ output:
 knitr::opts_chunk$set(error=FALSE)
 library("knitr")
 library("kableExtra")
-library("ggbiplot")
 source("R/clean.R")
 source("R/analysis.R")
 ```
+
+### Survey Information
+* Survey date: 03/06 – 06/06
+* Survey site: WeChat
+* Sampling method: Snowball
+* Reached: 1587 (7 provincial level district in China)
+* Returned: 247 (189 participants are from Anhui Province where the survey started to circulate in WeChat networks)
+* Effective sample: 225
+* Mean survey completion time: 14mins, 27seconds
+
 
 <!-- Prepare data for analysis -->
 ```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
@@ -34,11 +43,11 @@ dat <- sub_scale(dat0, coding, remove = FALSE)
 ### cronbach's alpha from psych package
 #status origin - 0.916 - excelllent
 cols <- grep("status_origin[0-9]{1}", names(dat))
-psych::alpha(dat[cols])$total$std.alpha
+a_1 <- psych::alpha(dat[cols])$total$std.alpha
 
 #status current - 0.917 - excellent
 cols <- grep("status_current[0-9]{1}", names(dat))
-psych::alpha(dat[cols])$total$std.alpha
+a_2 <- psych::alpha(dat[cols])$total$std.alpha
 
 # #con-2-child - can become a subscale
 # psych::alpha(dat[29:34])$total$std.alpha
@@ -49,27 +58,47 @@ psych::alpha(dat[cols])$total$std.alpha
 # psych::alpha(dat[cols])$total$std.alpha
 # life satisfaction - 0.886 - great
 cols <- grep("life_satisfaction[0-9]{1}", names(dat))
-psych::alpha(dat[cols])$total$std.alpha
+a_3 <- psych::alpha(dat[cols])$total$std.alpha
 # motherhood satisfaction - 0.835 - great
 cols <- grep("motherhood_satisfaction[0-9]{1}", names(dat))
-psych::alpha(dat[cols])$total$std.alpha
+a_4 <- psych::alpha(dat[cols])$total$std.alpha
 # mother interferes work - 0.932 - excellent
 cols <- grep("mother_interferes_work[0-9]{1}", names(dat))
-psych::alpha(dat[cols])$total$std.alpha
+a_5 <- psych::alpha(dat[cols])$total$std.alpha
 # work interferes mother - 0.951 - excellent
 cols <- grep("work_interferes_mother[0-9]{1}", names(dat))
-psych::alpha(dat[cols])$total$std.alpha
+a_6 <- psych::alpha(dat[cols])$total$std.alpha
 
 ```
 
+The questionnaire has six sub-scales. For each of the sub-scales, Cronbach's alpha is used to test its reliability. Below are the sub-scales and their reliability scores.
+
+* 1) mother's status in original family (alpha = `r round(a_1, 2)`)
+* 2) mother's status in current family (alpha = `r round(a_2, 2)`)
+* 3) life satisfaction (alpha = `r round(a_3, 2)`)
+* 4) motherhood satisfaction (alpha = `r round(a_4, 2)`)
+* 5) motherhood interfers work (alpha = `r round(a_5, 2)`)
+* 6) work interferes motherhood (alpha = `r round(a_6, 2)`)
+
+In general, Cronbach's alpha indicates great/excellent reliability.
+
+
+### .2.content analysis of motherhood perception
+```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+dat <- sub_scale(dat0, coding, remove = TRUE)
+dat <- content_anlaysis(dat)
+```
+The questionnaire asks mothers to provide theri own perceptions of motherhood. A content analysis has been undertaken. Two types of codes - modern and traditional mothers are constructed, along with corresponding sets of sub-codes. (should I say the sources of the codes? traditional is from https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E6%AF%8D%E4%BA%B2%E6%96%87%E5%8C%96%E5%A4%8D%E5%85%B4%E5%B7%A5%E7%A8%8B/19483382 , and modern is from the content itself.)
+
+
 ### two sample t test
-```{r, echo = TRUE, results = 'markup'}
+```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
 # group by whether mothers are only-children to their own parents
 # we find group difference in the following variables
 dat <- sub_scale(dat0, coding, remove = TRUE)
-dat$high_edu <- dat$education > 1
-dat$high_income <- dat$income > 2
-groups <- c("only_child", "one_child", "young_mother", 
+dat$high_edu <- dat$education > 2
+dat$high_income <- dat$income > 1
+groups <- c("only_child", "has_brothers","one_child", "young_mother", 
             "self_2_child", "high_edu", "high_income")
 
 lapply(groups, function(group) unlist(lapply(names(dat)[-c(1:3)], function(i) two_sample_t(i, group, dat))))

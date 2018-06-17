@@ -47,7 +47,7 @@ dat <- content_anlaysis(dat)
 ### .3. two-sample t tests
 dat$high_edu <- dat$education > 2
 dat$high_income <- dat$income > 1
-groups <- c("only_child", "one_child", "young_mother", 
+groups <- c("only_child", "has_brothers","one_child", "young_mother", 
             "self_2_child", "high_edu", "high_income")
 
 lapply(groups, function(group) unlist(lapply(names(dat)[-c(1:3)], function(i) two_sample_t(i, group, dat))))
@@ -65,6 +65,7 @@ lm(education ~ only_child + mother_birth_order, data = dat)
 
 ## motherhood type independency check
 v <- dat[dat$motherhood_type != "unknown", ]
+v$motherhood_type <- v$motherhood_type == "traditional"
 for(i in names(dat[-c(1:3)])) {
   a = table(v$motherhood_type, 
             v[[i]])
@@ -74,13 +75,14 @@ for(i in names(dat[-c(1:3)])) {
   }
 }
 
-[1] "motherhood1"
 [1] "rank_mother"
-[1] "rank2_occup"
 [1] "birth_order1"
 [1] "birth_order2"
+[1] "birth_order3"
+[1] "birth_order4"
 [1] "education"
 [1] "motherhood_definition_translation"
+[1] "only_child"
 [1] "motherhood_type"
 
 a = table(v$motherhood_type, 
