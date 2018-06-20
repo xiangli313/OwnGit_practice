@@ -73,8 +73,17 @@ tran_other <- function(dat) {
     dat$has_brothers[k] <- TRUE
   }
   dat$has_brothers[is.na(dat$has_brothers)] <- FALSE
+  
   ## mother as the only child
   dat$only_child <- !(dat$birth_order2 %in% c("M", "F"))
+  
+  ## mother has son
+  i <- grep("^kid_birth_order[0-9]{1}", names(dat))
+  for(j in i) {
+    k <- dat[[j]] == "M"
+    dat$has_son[k] <- TRUE
+  }
+  dat$has_son[is.na(dat$has_son)] <- FALSE
   
   ### remove duplications
   i <- duplicated(dat$contact[dat$contact != ""])
@@ -109,7 +118,6 @@ tran_other <- function(dat) {
   dat$dob <- NULL
   dat$year <- NULL
   dat$month <- NULL
-  dat$age <-NULL
   
   dat
 }

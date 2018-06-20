@@ -1,4 +1,4 @@
-two_sample_t <- function(v, group, dat, alpha = 0.05,...) {
+two_sample_t <- function(v, group, dat, alpha = 0.05, print_out = FALSE, ...) {
   s <- v
   if ((is.numeric(dat[[v]][1L]) |
        is.logical(dat[[v]][1L])) & v != group) {
@@ -6,8 +6,10 @@ two_sample_t <- function(v, group, dat, alpha = 0.05,...) {
     if(d$p.value >= alpha) {
       s= NULL
     } else {
-      print(paste("group by", group, "testing variable", v, sep = " "))
-      print(d)
+      if(print_out) {
+        print(paste("group by", group, "testing variable", v, sep = " "))
+        print(d)
+      }
     }
   } else { s = NULL }
   s

@@ -1,11 +1,11 @@
 ---
-title: "Dissertaion Progress Report"
+title: "Dissertation Progress Report"
 author: "Lin Chen"
 date: "`r (Sys.time())`"
 output:
-  # html_document: default
-   pdf_document: default
-  # word_document: default
+# html_document: default
+#pdf_document: default
+ word_document: default
 ---
 
 <!-- load R sources -->
@@ -34,28 +34,23 @@ coding <- read.csv("data/survey_questions.csv", stringsAsFactors = FALSE)
 dat0 <- read_dat(src, coding)
 dat0 <- tran_age(dat0)
 dat0 <- tran_other(dat0)
+dat0 <- content_anlaysis(dat0)
+dat0$high_edu <- dat0$education > 2
+dat0$high_income <- dat0$income > 2
+dat0$first_son <- dat0$kid_birth_order1 == "M"
+dat <- sub_scale(dat0, coding, remove = FALSE)
 ```
 
 ### Internal consistency measures of reliability
 ```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
 dat <- sub_scale(dat0, coding, remove = FALSE)
-
 ### cronbach's alpha from psych package
 #status origin - 0.916 - excelllent
 cols <- grep("status_origin[0-9]{1}", names(dat))
 a_1 <- psych::alpha(dat[cols])$total$std.alpha
-
 #status current - 0.917 - excellent
 cols <- grep("status_current[0-9]{1}", names(dat))
 a_2 <- psych::alpha(dat[cols])$total$std.alpha
-
-# #con-2-child - can become a subscale
-# psych::alpha(dat[29:34])$total$std.alpha
-# # pro-2-child - can become a subscale
-# psych::alpha(dat[36:41])$total$std.alpha
-#motherhood experience - questionable, but this is not a subscale though
-# cols <- grep("motherhood[0-9]{1}", names(dat))
-# psych::alpha(dat[cols])$total$std.alpha
 # life satisfaction - 0.886 - great
 cols <- grep("life_satisfaction[0-9]{1}", names(dat))
 a_3 <- psych::alpha(dat[cols])$total$std.alpha
@@ -77,32 +72,159 @@ The questionnaire has six sub-scales. For each of the sub-scales, Cronbach's alp
 * 2) mother's status in current family (alpha = `r round(a_2, 2)`)
 * 3) life satisfaction (alpha = `r round(a_3, 2)`)
 * 4) motherhood satisfaction (alpha = `r round(a_4, 2)`)
-* 5) motherhood interfers work (alpha = `r round(a_5, 2)`)
+* 5) motherhood interferes work (alpha = `r round(a_5, 2)`)
 * 6) work interferes motherhood (alpha = `r round(a_6, 2)`)
 
 In general, Cronbach's alpha indicates great/excellent reliability.
 
+### Regression analysis
+In this section, I am using regression techniques to explore the survey data. Education, family status and individualistic thoughts are indicators of women's liberation and empowerment. Models are selected by consideration of AIC and BIC criteria.
 
-### .2.content analysis of motherhood perception
-```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
+#### Education level
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+## education exploration - DONE
 dat <- sub_scale(dat0, coding, remove = TRUE)
-dat <- content_anlaysis(dat)
+a = glm(education ~ young_mother + only_child, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+AIC(a)
+a = glm(education ~ young_mother + has_brothers, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+AIC(a) #smaller AIC, so has brothers is better predictor than only_child
+BIC(a)
+a = glm(education ~ young_mother + has_brothers + mother_birth_order, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+AIC(a) # even better, so education is an outcome of age, has brothers and birth order effect
+BIC(a)
 ```
-The questionnaire asks mothers to provide theri own perceptions of motherhood. A content analysis has been undertaken. Two types of codes - modern and traditional mothers are constructed, along with corresponding sets of sub-codes. (should I say the sources of the codes? traditional is from https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E6%AF%8D%E4%BA%B2%E6%96%87%E5%8C%96%E5%A4%8D%E5%85%B4%E5%B7%A5%E7%A8%8B/19483382 , and modern is from the content itself.)
+
+The selected model is 
+
+`education = young_mother + has_brothers + mother_birth_order + error`
+
+where education level (`1 - higher school or lower; 2 - college; 3 - university or higher`) is positively associated with mother's generation order (`p-value = 0.0004`). In general, education level is `r round(a$coefficients["young_motherTRUE"], 2)` higher in younger generation of mothers (`age <= 36 years`) than older generation (`age > 36 years`), controlling for whether a participant has brother(s) and her birth order. 
+* This is the side effect of one-child policy. I understand it as that the policy was designed for population control and economic growth, which would both improve on natioanl education level. 
+
+Son-preference effect on education is revealed by the negative association between education level and variable `has_brothers` (a mother has brother(s)) (`p-value = 0.004`). Controlling for the other two varibles, a mother who has a brother is `r abs(round(a$coefficients["has_brothersTRUE"], 2))` lower in education.
+* This is effect of traditional culture of son-preference. Having brothers cause unfair allocation of educational resources in families.
+
+Birth order effect (`p-value` = 0.004) is also significant. Controlling for the other two variables, every one unit increase in mother's birth order is associated with `r abs(round(a$coefficients["mother_birth_order"], 2))` decrease in education level.
+* This is of more material concern. Bigger children are educated earlier than younger children. When materal resources are limited, bigger children may have advantage in continuing their education.
 
 
-### two sample t test
-```{r echo = FALSE, results = 'asis', warning = FALSE, message = FALSE}
-# group by whether mothers are only-children to their own parents
-# we find group difference in the following variables
+#### original status exploration
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+# independency check for status
 dat <- sub_scale(dat0, coding, remove = TRUE)
-dat$high_edu <- dat$education > 2
-dat$high_income <- dat$income > 1
-groups <- c("only_child", "has_brothers","one_child", "young_mother", 
-            "self_2_child", "high_edu", "high_income")
-
-lapply(groups, function(group) unlist(lapply(names(dat)[-c(1:3)], function(i) two_sample_t(i, group, dat))))
+a = glm(status_origin ~ has_brothers, 
+        data = dat, gaussian(link='identity'))
+summary(a)
 ```
+Original status of mothers as a response variable is negatively associated with whether mothers have brothers (`p-value = 0.05`). Motehrs consider themselves are highly valued (mean score of 3.51 out of 5) in their original families where they grow up. However, when they have brothers, a deduction of 0.29 in status score is expected.
+
+#### current status exploration
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+dat <- sub_scale(dat0, coding, remove = TRUE)
+a = glm(status_current ~ status_origin + rank2_husband + has_brothers + income, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+BIC(a)
+```
+* Original status is the most dramatic predictor (`p-value` < 2e-16) of mothers' status in current family after marrige. 
+* It is noted that a mother who thinks that her husband ranks higher his identity as a husband than other identities tend to have greater family status.
+* Interestingly, the variable has_brothers is positively associated with current status, but negatively associated wtih original status. In Chinese culture, a women who has brothers has more symbolic support from her original family. Because marriage is more of two families joint together than having independent families. 
+* Household income is an other determinant of family status. The higher the per-capita income is, the higher a mother's family status is. (I measured per-capita income. I should have measured mother's own income level too. But it is too late now.)
+
+#### self and occupation ranks
+
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+dat <- sub_scale(dat0, coding, remove = FALSE)
+# rank_self, 
+a = glm(rank_self ~  age, 
+        data = dat[is.finite(dat$age), ], gaussian(link='identity'))
+summary(a)
+
+# rank_occupation
+a = glm(rank_occup ~ education, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+```
+Two models are formulated to explore women's self-constual.
+1) younger mothers value themselves more than older mothers. I think, the sense of self is aggregating as life experience accumulation.
+
+2) In general, mothers do not value occupation as much as their other identities. Having a job is not much more than gaining material support for the family. However, women having higher education tends to value their occupation more than less educated mothers. 
+
+#### Mother's fertility preference
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+# fertility_preference
+dat <- sub_scale(dat0, coding, remove = TRUE)
+a = glm(fertility_preference ~ first_son + childhood, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+BIC(a)
+```
+Mother's fertility preference (whether the preference is having only one child) is determined by her own attituce toward only-children and whether her first child is a boy.
+
+1)Mothers who have better view of only-children tend to prefer having only one child. 
+2) Mothers whoes first child is a boy, are more likely to prefer having a 2nd child. I think this is because they feel less pressure in having a 2nd child, as they have already had a son.
+
+#### Have only one child
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+dat <- sub_scale(dat0, coding, remove = TRUE)
+a = glm(one_child ~  husband_2_child + fertility_preference, 
+        data = dat, binomial(link='logit'))
+summary(a)
+BIC(a)
+```
+Whether mothers have/to have a 2nd child is determined by mothers' own fertility preference and their husbands' intentions. I am surprised to see that parents/in-laws intentions are reported by mothers, but which are not significant factors in their family size planning.    
+
+#### inlaws pressure
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+
+a = glm(inlaws_2_child ~ first_son + age, 
+        data = dat, binomial(link='logit'))
+summary(a)
+```
+Weather inlaws press on mothers to have a 2nd child depends on two variables - 1) whether the first child is a boy; 2) the mother's age.
+
+First boy, enough.
+Older age, forget it.
+
+### content analysis of motherhood perception
+
+The questionnaire asks mothers to provide their own perceptions of motherhood. A content analysis has been undertaken. Two primary codes - modern and traditional mothers are constructed, along with corresponding sets of codes. (should I say the sources of the codes? traditional codes are from https://baike.baidu.com/item/%E4%B8%AD%E5%8D%8E%E6%AF%8D%E4%BA%B2%E6%96%87%E5%8C%96%E5%A4%8D%E5%85%B4%E5%B7%A5%E7%A8%8B/19483382, and modern codes are from the content itself.)
+
+Mothers perceptions of motherhood are then analysed using the code book. An external coder coded the content, and the inter-coder reliability is 89.78% (202/225). Top 10 recurrent codes are listed in the table below.
+
+```{r echo = FALSE, results = 'markup', warning = FALSE, message = FALSE}
+d <- read.csv("output/motherhood_code_book_with frequency.csv", stringsAsFactors = FALSE)
+d <- d[c("code_type", "code", "code_count")]
+names(d) <- c("Primary code", "Codes", "Freq")
+d1 <- d[d$`Primary code` == "modern", ]
+d2 <- d[d$`Primary code` == "traditional", ]
+d3 <- d[d$`Primary code` == "unknown", ]
+d <- cbind(d1[1:10, ], d2[1:10, ])
+kable(d, align = "c", caption = "Top ten recurrent codes")  %>%
+  add_footnote(c("`pillar` is a word I pick up to represent mothers who are the major supporter in a family; it is similar but slightly different from core of family, which is has more sense of centredness."), notation = "number")
+```
+Depending on mothers expressions, mothers are catogorised into `Traditional mother`, `Transitioning mother` and `Modern mother` (and `unknown mother` who is not identifiable). In the sample there are `r sum(dat$motherhood_type == "traditional")` traditional, `r sum(dat$motherhood_type == "mixed")` transitioning, `r sum(dat$motherhood_type == "modern")` modern perceptions of motherhood and `r sum(dat$motherhood_type == "unknown")` unknown types of perceptions. Of known types of motherhood perceptions (`r sum(dat$motherhood_type != "unknown")`), `r round(sum(dat$motherhood_type == "traditional")/ sum(dat$motherhood_type != "unknown") * 100, 2)` % are traditional, and `r 1-round(sum(dat$motherhood_type == "traditional")/ sum(dat$motherhood_type != "unknown") * 100, 2)` are transitional or modern.
+
+#### Logistic regression: exploration of motherhood perception 
+```{r echo = FALSE, results = 'hide', warning = FALSE, message = FALSE}
+v <- dat[dat$motherhood_type != "unknown", ]
+v$motherhood_type <- v$motherhood_type == "traditional"
+a = glm(motherhood_type ~ education + rank_self, 
+        data = v, binomial(link='logit'))
+summary(a)
+```
+
+I filtered out unknown types of motherhood perceptions (remaining 198 out of 225 effective sample size), constructed the response variable as motherhood_type (1 = traditional, 0 = other), and did logistic regression for it. 
+
+
+How the mother perceives motherhood is determined by her education level and how much she value her sense of self. I have argued that education is an indicator of empowerment/liberation, and self is more of life experience accumulation.  
+
 
 
 
@@ -142,4 +264,19 @@ lapply(groups, function(group) unlist(lapply(names(dat)[-c(1:3)], function(i) tw
 <!-- print(d.fac, digits = 2, cutoff = .4, sort = TRUE) -->
 <!-- ``` -->
 
+## Index A
+### two sample t test and group mean/difference
+```{r echo = FALSE, results = 'markup', warning = FALSE, message = FALSE}
+# group by whether mothers are only-children to their own parents
+# we find group difference in the following variables
+dat <- sub_scale(dat0, coding, remove = TRUE)
+groups <- c("only_child", "has_brothers", "has_son", "first_son", "one_child", "young_mother", "self_2_child", "high_edu", "high_income")
+
+a = lapply(groups, function(group) unlist(lapply(names(dat)[-c(1:3)], function(i) two_sample_t(i, group, dat))))
+
+for(i in seq_along(groups)){
+  j = match(a[[i]], names(dat))
+  unlist(lapply(names(dat)[j], function(t) two_sample_t(t, groups[i], dat, print_out = TRUE)))
+}
+```
 
