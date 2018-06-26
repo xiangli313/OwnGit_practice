@@ -163,3 +163,30 @@ a = glm(inlaws_2_child ~ first_son + young_mother,
 AIC(a) 
 BIC(a) 
 summary(a)
+
+
+
+#### household
+dat <- sub_scale(dat0, coding, remove = TRUE)
+dat$no_other_household <- dat$other_household2 == "no"
+a = glm(motherhood_satisfaction ~ no_other_household + motherhood4, 
+        data = dat, gaussian(link='identity'))
+summary(a)
+
+b = glm(life_satisfaction ~  motherhood_satisfaction + status_current, 
+        data = dat, gaussian(link='identity'))
+summary(b)
+
+
+d = dat[-c(1:3)]
+d <- d[!(names(d) %in% c("rank_daughter", "rank2_son", "high_edu", "high_income"))]
+for(v in names(d)) { 
+       #if( !all(is.numeric(d[[v]]) & is.finite(d[[v]])) ) { 
+       if( !all(is.finite(d[[v]])) ) { 
+             d[[v]] <- NULL 
+             } 
+} 
+
+d.fac <- factanal(d, factors = 15, rotation = "varimax", scores=c("regression"))
+d.fac
+print(d.fac, digits = 2, cutoff = .4, sort = TRUE) 

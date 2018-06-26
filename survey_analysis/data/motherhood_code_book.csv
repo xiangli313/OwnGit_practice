@@ -1,88 +1,88 @@
 code_type,code,code_short
-traditional,caring,caring
-traditional,education,education
+modern,brave,brave
+modern,breadwinner,breadwinner
+modern,calm emotions,calm
+modern,close,close
+modern,confident,confident
+modern,core of family,core of family
+modern,cultivate children's personality,personality
+modern,cultivate knowledge of judgement,judgement
+modern,cultivating a sense of love,cultivating a sense of love
+modern,cultivating independence,cultivating independence
+modern,deliver positive views,deliver positive views
+modern,detach from the children,detach
+modern,economically independent,economically independent
+modern,educational resource provider,educational
+modern,encyclopedia,encyclopedia
+modern,enlightenment,enlightenment
+modern,explore the self,explore the self
+modern,friend,friend
+modern,grow up together with children,grow up
+modern,harvest happiness,harvest happiness
+modern,hold up the whole family,hold up the whole family
+modern,independence,independence
+modern,knowing the self,knowing the self
+modern,knowledgeable,knowledgeable
+modern,love the self first,love the self first
+modern,material resource provider,material
+modern,multiple roles,multiple roles
+modern,not spoiling children,spoiling
+modern,occupation,occupation
+modern,perfection of the self,perfection of the self
+modern,pillar,pillar
+modern,provide a sense of security,provide a sense of security
+modern,reasoning,reasoning
+modern,respect children,respect
+modern,responsibility to society,society
+modern,role model,role model
+modern,self,self
+modern,social resource provider,social
+modern,spiritual pillar,spiritual pillar
+modern,stable emotions,stable
+modern,strict,strict
+modern,strong,strong
+modern,understanding,understanding
 traditional,accompany,accompany
-traditional,guidance,guidance
-traditional,dedication,dedication
-traditional,great,great
-traditional,love,love
-traditional,responsibility,responsibility
-traditional,patience,patience
-traditional,giving,giving
-traditional,not asking for return,not asking for return
-traditional,family centred,family centred
-traditional,children centred,children centred
-traditional,home,home
+traditional,babysitter,babysitter
+traditional,backup for children,backup for children
+traditional,backup for husband,backup for husband
+traditional,caring,caring
+traditional,caring for the family,caring for the family
+traditional,caring for the in-laws,caring for the in-laws
 traditional,childbearing,childbearing
-traditional,warm,warm
-traditional,sacrifice the self,sacrifice the self
-traditional,unconditional love,unconditional love
-traditional,selfless,selfless
+traditional,children centred,children centred
+traditional,dedication,dedication
+traditional,education,education
+traditional,family centred,family centred
+traditional,filial,filial
+traditional,gentle,gentle
+traditional,giving,giving
+traditional,giving children the best with best effort,giving children the best with best effort
+traditional,good wife and great mother,good wife and great mother
+traditional,great,great
 traditional,guardian,guardian
+traditional,guidance,guidance
+traditional,home,home
+traditional,love,love
+traditional,love husband,love husband
+traditional,not asking for return,not asking for return
 traditional,obligation,obligation
-traditional,tolerance,tolerance
+traditional,patience,patience
+traditional,provide happiness,provide happiness
+traditional,responsibility,responsibility
+traditional,sacrifice the self,sacrifice the self
+traditional,selfless,selfless
+traditional,sharing,sharing
 traditional,soft,soft
 traditional,someone to rely on,rely on
-traditional,babysitter,babysitter
-traditional,sharing,sharing
-traditional,teacher,teacher
-traditional,giving children the best with best effort,giving children the best with best effort
-traditional,gentle,gentle
 traditional,supportive for children,supportive for children
-traditional,backup for children,backup for children
-modern,enlightenment,enlightenment
-modern,role model,role model
-modern,pillar,pillar
-modern,spiritual pillar,spiritual pillar
-modern,encyclopedia,encyclopedia
-modern,confident,confident
-modern,responsibility to society,society
-modern,brave,brave
-modern,not spoiling children,spoiling
-modern,core of family,core of family
-modern,hold up the whole family,hold up the whole family
-modern,grow up together with children,grow up together
-modern,provide a sense of security,provide a sense of security
-modern,cultivating a sense of love,cultivating a sense of love
-modern,strong,strong
-modern,detach from the children,detach
-modern,knowledgeable,knowledgeable
-modern,reasoning,reasoning
-modern,economically independent,economically independent
-modern,multiple roles,multiple roles
-modern,friend,friend
-modern,deliver positive views,deliver positive views
-modern,calm emotions,calm
-modern,independence,independence
-modern,occupation,occupation
-modern,love the self first,love the self first
-modern,strict,strict
-modern,stable emotions,stable
-modern,explore the self,explore the self
-modern,respect children,respect
-modern,understanding,understanding
-modern,harvest happiness,harvest happiness
-modern,self,self
-modern,cultivate children's personality,personality
-modern,perfection of the self,perfection of the self
-modern,breadwinner,breadwinner
-modern,cultivate knowledge of judgement,judgement
-modern,knowing the self,knowing the self
-modern,cultivating independence,cultivating independence
-modern,educational resource provider,educational
-modern,material resource provider,material
-modern,social resource provider,social
-unknown,toilsome,toilsome
-modern,close,close
-unknown,pressure,pressure
-unknown,"women are weak, but mothers are strong","women are weak, but mothers are strong"
-unknown,mother,mother
-unknown,caring for the in-laws,caring for the in-laws
-unknown,influential,influential
-unknown,backup for husband,backup for husband
-unknown,filial,filial
+traditional,teacher,teacher
+traditional,tolerance,tolerance
+traditional,unconditional love,unconditional love
+traditional,warm,warm
+traditional,"women are weak, but mothers are strong","women are weak, but mothers are strong"
 unknown,an important role in the family,an important role in the family
-unknown,good wife and great mother,good wife and great mother
-unknown,love husband,love husband
-unknown,caring for the family,caring for the family
-traditional,provide happiness,provide happiness
+unknown,influential,influential
+unknown,mother,mother
+unknown,pressure,pressure
+unknown,toilsome,toilsome
