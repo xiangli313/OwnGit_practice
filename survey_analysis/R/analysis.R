@@ -116,7 +116,7 @@ y_motherhood_type <- function(dat, model_variable) {
   d <- dat[model_variable]
   d <- d[!is.na(d$mother_birth_order) & d$other_household2 != "", ]
   d <- d[d$motherhood_type != "unknown",]
-  d$mother_birth_order[d$mother_birth_order > 4] <- 4
+  d$mother_birth_order[d$mother_birth_order > 6] <- 6
   d$occupation_type <- d$occupation_type %in% c("white")
   d$other_household2 <- d$other_household2 == "no"
   d$motherhood_type[d$motherhood_type == "traditional"] <- 0
