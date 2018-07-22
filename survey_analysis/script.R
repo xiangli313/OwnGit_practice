@@ -8,13 +8,10 @@ dat0 <- read_dat(src, coding)
 dat0 <- tran_age(dat0)
 dat0 <- tran_other(dat0)
 dat0 <- content_anlaysis(dat0)
-dat0$high_edu <- dat0$education > 2
-dat0$high_income <- dat0$income > 2
 dat0$first_son <- dat0$kid_birth_order1 == "M"
-dat <- sub_scale(dat0, coding, remove = FALSE)
-
 ### .1. internal consistency measures of reliability
 ### cronbach's alpha from psych package
+dat <- sub_scale(dat0, coding, remove = FALSE)
 #status origin - 0.916 - excelllent
 cols <- grep("status_origin[0-9]{1}", names(dat))
 psych::alpha(dat[cols])$total$std.alpha
@@ -42,6 +39,29 @@ psych::alpha(dat[cols])$total$std.alpha
 # work interferes mother - 0.951 - excellent
 cols <- grep("work_interferes_mother[0-9]{1}", names(dat))
 psych::alpha(dat[cols])$total$std.alpha
+
+
+## analysis
+dat <- sub_scale(dat0, coding, remove = TRUE)
+con_2nd_child <- c("economy", "material_1_child", "emotion_1_child", 
+                   "career", "health", "rejection_1_child", "con_other")
+pro_2nd_child <- c("good", "reduce_lonely_1_child", "reduce_obligation_1_child", 
+                   "better_aging", "pressure_parents", "pressure_inlaws", "pro_other")
+own_ranks <- c("rank_self", "rank_wife", "rank_daughter", "rank_mother", "rank_occup")
+husband_ranks <- c("rank2_self", "rank2_husband", "rank2_son", "rank2_father", "rank2_occup")
+who_wants_2nd_child <- c("self_2_child", "husband_2_child", "parents_2_child", "inlaws_2_child", "child_2_child")
+mothering_experience <- c("motherhood1", "motherhood2", "motherhood3", "motherhood4", "motherhood5", "motherhood6")
+model_variable <- c("fertility_preference", "rank_self", "rank_mother",
+                    "mother_birth_order", "other_household2", 
+                    "education", "occupation_type", "income", 
+                    "age", "has_brothers", "has_son", "only_child",
+                    "motherhood_type", "young_mother",  "one_child", 
+                    "childhood", "status_origin", "status_current", 
+                    "life_satisfaction", "motherhood_satisfaction", 
+                    "mother_interferes_work", "work_interferes_mother")
+cols<- unique(c(con_2nd_child, pro_2nd_child, own_ranks, husband_ranks, 
+                who_wants_2nd_child, mothering_experience, model_variable))
+dat <- dat[cols]
 
 ### .3. two-sample t tests
 dat <- sub_scale(dat0, coding, remove = TRUE)
@@ -83,7 +103,7 @@ for(i in names(dat[-c(1:3)])) {
 ## motherhood type independency check
 v <- dat[dat$motherhood_type != "unknown", ]
 v$motherhood_type <- v$motherhood_type == "traditional"
-for(i in names(dat[-c(1:3)])) {
+for(i in names(v[-c(1:3)])) {
   a = table(v$motherhood_type, 
             v[[i]])
   a = summary(a)
@@ -156,8 +176,6 @@ AIC(a)
 BIC(a) 
 summary(a)
 ## rank self: individualism v.s. holistic
-
-
 a = glm(inlaws_2_child ~ first_son + young_mother, 
         data = v, binomial(link='logit'))
 AIC(a) 
@@ -177,16 +195,3 @@ b = glm(life_satisfaction ~  motherhood_satisfaction + status_current,
         data = dat, gaussian(link='identity'))
 summary(b)
 
-
-d = dat[-c(1:3)]
-d <- d[!(names(d) %in% c("rank_daughter", "rank2_son", "high_edu", "high_income"))]
-for(v in names(d)) { 
-       #if( !all(is.numeric(d[[v]]) & is.finite(d[[v]])) ) { 
-       if( !all(is.finite(d[[v]])) ) { 
-             d[[v]] <- NULL 
-             } 
-} 
-
-d.fac <- factanal(d, factors = 15, rotation = "varimax", scores=c("regression"))
-d.fac
-print(d.fac, digits = 2, cutoff = .4, sort = TRUE) 

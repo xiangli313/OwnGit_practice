@@ -1,7 +1,7 @@
 "code_type","code","code_short","code_count"
-"modern","self","self",29
 "modern","role model","role model",9
 "modern","strong","strong",9
+"modern","self","self-self",8
 "modern","friend","friend",6
 "modern","core of family","core of family",5
 "modern","enlightenment","enlightenment",4
@@ -20,7 +20,6 @@
 "modern","confident","confident",1
 "modern","cultivate children's personality","personality",1
 "modern","cultivate knowledge of judgement","judgement",1
-"modern","cultivating a sense of love","cultivating a sense of love",1
 "modern","cultivating independence","cultivating independence",1
 "modern","deliver positive views","deliver positive views",1
 "modern","economically independent","economically independent",1
@@ -31,7 +30,6 @@
 "modern","independence","independence",1
 "modern","knowing the self","knowing the self",1
 "modern","knowledgeable","knowledgeable",1
-"modern","love the self first","love the self first",1
 "modern","not spoiling children","spoiling",1
 "modern","perfection of the self","perfection of the self",1
 "modern","provide a sense of security","provide a sense of security",1
@@ -42,28 +40,33 @@
 "modern","spiritual pillar","spiritual pillar",1
 "modern","stable emotions","stable",1
 "modern","understanding","understanding",1
+"modern","superwomen","superwomen",1
+"modern","an important role in the family","an important role in the family",1
+"modern","love the self first","love the self first",0
 "traditional","great","great",31
 "traditional","caring","caring",30
 "traditional","dedication","dedication",30
-"traditional","love","love",29
 "traditional","responsibility","responsibility",25
 "traditional","education","education",24
 "traditional","selfless","selfless",17
+"traditional","love","love-love",13
 "traditional","accompany","accompany",13
 "traditional","childbearing","childbearing",10
 "traditional","not asking for return","not asking for return",8
+"traditional","someone to rely on","rely on",8
 "traditional","teacher","teacher",8
 "traditional","children centred","children centred",7
 "traditional","guidance","guidance",7
 "traditional","tolerance","tolerance",7
 "traditional","women are weak, but mothers are strong","women are weak, but mothers are strong",7
+"traditional","mother","mother-mother",7
 "traditional","backup for children","backup for children",6
 "traditional","home","home",5
-"traditional","someone to rely on","rely on",5
 "traditional","giving","giving",4
 "traditional","guardian","guardian",4
 "traditional","sacrifice the self","sacrifice the self",4
 "traditional","warm","warm",4
+"traditional","toilsome","toilsome",4
 "traditional","patience","patience",3
 "traditional","babysitter","babysitter",2
 "traditional","caring for the in-laws","caring for the in-laws",2
@@ -72,17 +75,14 @@
 "traditional","sharing","sharing",2
 "traditional","soft","soft",2
 "traditional","supportive for children","supportive for children",2
+"traditional","influential","influential",2
 "traditional","backup for husband","backup for husband",1
 "traditional","caring for the family","caring for the family",1
 "traditional","family centred","family centred",1
 "traditional","filial","filial",1
-"traditional","giving children the best with best effort","giving children the best with best effort",1
+"traditional","giving children the best with best effort","children the best with best effort",1
 "traditional","love husband","love husband",1
 "traditional","provide happiness","provide happiness",1
 "traditional","unconditional love","unconditional love",1
+"traditional","pressure","pressure",1
 "traditional","good wife and great mother","good wife and great mother",0
-"unknown","mother","mother",18
-"unknown","toilsome","toilsome",4
-"unknown","influential","influential",2
-"unknown","an important role in the family","an important role in the family",1
-"unknown","pressure","pressure",1

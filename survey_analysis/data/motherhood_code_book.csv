@@ -7,7 +7,6 @@ modern,confident,confident
 modern,core of family,core of family
 modern,cultivate children's personality,personality
 modern,cultivate knowledge of judgement,judgement
-modern,cultivating a sense of love,cultivating a sense of love
 modern,cultivating independence,cultivating independence
 modern,deliver positive views,deliver positive views
 modern,detach from the children,detach
@@ -35,13 +34,15 @@ modern,reasoning,reasoning
 modern,respect children,respect
 modern,responsibility to society,society
 modern,role model,role model
-modern,self,self
+modern,self,self-self
 modern,social resource provider,social
 modern,spiritual pillar,spiritual pillar
 modern,stable emotions,stable
 modern,strict,strict
 modern,strong,strong
 modern,understanding,understanding
+modern,superwomen,superwomen
+traditional,love,love-love
 traditional,accompany,accompany
 traditional,babysitter,babysitter
 traditional,backup for children,backup for children
@@ -57,13 +58,12 @@ traditional,family centred,family centred
 traditional,filial,filial
 traditional,gentle,gentle
 traditional,giving,giving
-traditional,giving children the best with best effort,giving children the best with best effort
+traditional,giving children the best with best effort,children the best with best effort
 traditional,good wife and great mother,good wife and great mother
 traditional,great,great
 traditional,guardian,guardian
 traditional,guidance,guidance
 traditional,home,home
-traditional,love,love
 traditional,love husband,love husband
 traditional,not asking for return,not asking for return
 traditional,obligation,obligation
@@ -81,8 +81,8 @@ traditional,tolerance,tolerance
 traditional,unconditional love,unconditional love
 traditional,warm,warm
 traditional,"women are weak, but mothers are strong","women are weak, but mothers are strong"
-unknown,an important role in the family,an important role in the family
-unknown,influential,influential
-unknown,mother,mother
-unknown,pressure,pressure
-unknown,toilsome,toilsome
+traditional,mother,mother-mother
+traditional,toilsome,toilsome
+modern,an important role in the family,an important role in the family
+traditional,influential,influential
+traditional,pressure,pressure
